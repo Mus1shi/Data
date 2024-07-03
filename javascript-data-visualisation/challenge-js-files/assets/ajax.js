@@ -179,6 +179,43 @@ function wfSupportsAjax() {
 	return supportsAjax;
 }
 
+
+
+
+//Code for the graphic
+
+const ctx = document.getElementById('graph1');
+
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+	labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+	datasets: [{
+	  label: '# of Votes',
+	  data: [12, 19, 3, 5, 2, 3],
+	  borderWidth: 1
+	}]
+  },
+  options: {
+	scales: {
+	  y: {
+		beginAtZero: true
+	  }
+	}
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
 // Expose + Mark as deprecated
 var deprecationNotice = 'Sajax is deprecated, use jQuery.ajax or mediawiki.api instead.';
 

@@ -27,6 +27,9 @@
   <link rel="stylesheet" href="./assets/font-awesome.min.css">
   <link rel="stylesheet" href="./assets/statexpflat.css">
   <link rel="stylesheet" href="./assets/statexpflat-grid.css">
+  <link rel="stylesheet" href="./assets/ajax.js">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
   <style>
     a:lang(ar),
@@ -798,8 +801,7 @@
               <h3>
                 <span class="mw-headline" id="Crimes_et_d.C3.A9lits_enregistr.C3.A9s_par_les_services_de_police">Crimes recorded by the police</span>
               </h3>
-
-
+              
               <table cellspacing="0" cellpadding="0" id="table1">
                 <caption> Table 1: Offences recorded by the police, 2002-12</caption>
                 <thead>
@@ -1469,6 +1471,7 @@
                 <span class="mw-headline" id="Homicides">Homicide</span>
               </h4>
 
+              <canvas id="graph2">
               <table cellspacing="0" cellpadding="0" id="table2">
                 <caption>Prison population, average per year, 2007-09 and 2010-12
                   <br> (per 100,000 inhabitants)</caption>
@@ -1725,6 +1728,7 @@
                   </tr>
                 </tbody>
               </table>
+              </canvas>
               <p>Homicide is defined as the intentional killing of a person, including murder, manslaughter, euthanasia and infanticide.
                 It excludes death by dangerous driving, abortion and assisted suicide. Homicides are reported fairly consistently and definitions
                 vary less between countries than for other types of crime. The results presented are for completed homicides, except for Latvia where the data include attempted homicide.
@@ -2063,5 +2067,48 @@
     <!--END PAGE-->
   </div>
 </body>
+
+
+<script>
+ const parent1 = document.querySelector('h3');
+const datas1 = document.createElement('div');
+parent1.appendChild(datas1);
+const canva1 = document.createElement('canvas');
+datas1.appendChild(canva1);
+const table1_full = document.getElementById('table1');
+const t1_tr = table1_full.querySelectorAll('tbody tr');
+
+const labels = [];
+const data = [];
+
+// Iterate over each row to extract data
+t1_tr.forEach(row => {
+    const cells = row.querySelectorAll('td');
+    if (cells.length > 0) {
+        labels.push(cells[0].innerText); // Extract category (first cell)
+        data.push(parseFloat(cells[1].innerText)); // Extract value (second cell) and convert to number
+    }
+});
+
+const ctx = canva1.getContext('2d'); // Use the created canvas element
+new Chart(ctx, { // Use the Chart constructor
+    type: 'bar', // You can change the chart type here
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Values',
+            data: data,
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
 
 </html>
