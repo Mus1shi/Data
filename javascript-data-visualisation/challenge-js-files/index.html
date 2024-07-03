@@ -801,7 +801,7 @@
               <h3>
                 <span class="mw-headline" id="Crimes_et_d.C3.A9lits_enregistr.C3.A9s_par_les_services_de_police">Crimes recorded by the police</span>
               </h3>
-              
+
               <table cellspacing="0" cellpadding="0" id="table1">
                 <caption> Table 1: Offences recorded by the police, 2002-12</caption>
                 <thead>
@@ -1471,7 +1471,6 @@
                 <span class="mw-headline" id="Homicides">Homicide</span>
               </h4>
 
-              <canvas id="graph2">
               <table cellspacing="0" cellpadding="0" id="table2">
                 <caption>Prison population, average per year, 2007-09 and 2010-12
                   <br> (per 100,000 inhabitants)</caption>
@@ -1728,7 +1727,6 @@
                   </tr>
                 </tbody>
               </table>
-              </canvas>
               <p>Homicide is defined as the intentional killing of a person, including murder, manslaughter, euthanasia and infanticide.
                 It excludes death by dangerous driving, abortion and assisted suicide. Homicides are reported fairly consistently and definitions
                 vary less between countries than for other types of crime. The results presented are for completed homicides, except for Latvia where the data include attempted homicide.
@@ -2070,9 +2068,11 @@
 
 
 <script>
- const parent1 = document.querySelector('h3');
+  // Premier tableau
+  
+ const table1 = document.querySelector('h3');
 const datas1 = document.createElement('div');
-parent1.appendChild(datas1);
+table1.appendChild(datas1);
 const canva1 = document.createElement('canvas');
 datas1.appendChild(canva1);
 const table1_full = document.getElementById('table1');
@@ -2092,12 +2092,55 @@ t1_tr.forEach(row => {
 
 const ctx = canva1.getContext('2d'); // Use the created canvas element
 new Chart(ctx, { // Use the Chart constructor
-    type: 'bar', // You can change the chart type here
+    type: 'line', // You can change the chart type here
     data: {
         labels: labels,
         datasets: [{
             label: 'Values',
             data: data,
+            borderWidth: 3,
+            backgroundColor: '#008000',
+            borderColor: '#FFA500',
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+// deuxieme tableau
+
+const table2 = document.getElementById('Homicides');
+const datas2 = document.createElement('div');
+table2.appendChild(datas2);
+const canva2 = document.createElement('canvas');
+datas2.appendChild(canva2);
+const table2_full = document.getElementById('table2');
+const t1_tr2 = table2_full.querySelectorAll('tbody tr');
+
+const labels2 = [];
+const data2 = [];
+
+t1_tr2.forEach(row => {
+    const cells2 = row.querySelectorAll('td');
+    if (cells2.length > 0) {
+        labels2.push(cells2[0].innerText); // Extract category (first cell)
+        data2.push(parseFloat(cells2[1].innerText)); // Extract value (second cell) and convert to number
+    }
+});
+
+const ctx2 = canva2.getContext('2d'); // Use the created canvas element
+new Chart(ctx2, { // Use the Chart constructor
+    type: 'bar', // You can change the chart type here
+    data: {
+        labels: labels2,
+        datasets: [{
+            label: 'Values',
+            data: data2,
             borderWidth: 1
         }]
     },
