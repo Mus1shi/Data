@@ -27,7 +27,6 @@
   <link rel="stylesheet" href="./assets/font-awesome.min.css">
   <link rel="stylesheet" href="./assets/statexpflat.css">
   <link rel="stylesheet" href="./assets/statexpflat-grid.css">
-  <link rel="stylesheet" href="./assets/ajax.js">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
@@ -2070,7 +2069,7 @@
 <script>
   // Premier tableau
   
- const table1 = document.querySelector('h3');
+const table1 = document.querySelector('h3');
 const datas1 = document.createElement('div');
 table1.appendChild(datas1);
 const canva1 = document.createElement('canvas');
@@ -2133,9 +2132,9 @@ t1_tr2.forEach(row => {
     }
 });
 
-const ctx2 = canva2.getContext('2d'); // Use the created canvas element
+const ctx2 = canva2.getContext('3d'); // Use the created canvas element
 new Chart(ctx2, { // Use the Chart constructor
-    type: 'doughnut', // You can change the chart type here
+    type: 'bar', // You can change the chart type here
     data: {
         labels: labels2,
         datasets: [{
